@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://qq6hbu2kpxgy"]
+
+[ext_resource type="Texture2D" uid="uid://cweq8i1yb8aj5" path="res://purple.png" id="1_bj1m1"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 2304.0
+offset_bottom = 1296.0
+texture = ExtResource("1_bj1m1")
+stretch_mode = 1
