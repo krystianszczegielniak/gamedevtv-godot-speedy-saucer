@@ -1,11 +1,67 @@
-[gd_scene load_steps=2 format=3 uid="uid://qq6hbu2kpxgy"]
+[gd_scene load_steps=7 format=3 uid="uid://qq6hbu2kpxgy"]
 
+[ext_resource type="Script" path="res://level.gd" id="1_an4pe"]
 [ext_resource type="Texture2D" uid="uid://cweq8i1yb8aj5" path="res://purple.png" id="1_bj1m1"]
+[ext_resource type="PackedScene" uid="uid://5lfnwqhxtdh2" path="res://player.tscn" id="2_opugl"]
+[ext_resource type="PackedScene" uid="uid://buverjhu83xxl" path="res://maze.tscn" id="3_sa8cg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ffght"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_30njc"]
+font_size = 24
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_an4pe")
 
-[node name="Background" type="TextureRect" parent="."]
-offset_right = 2304.0
-offset_bottom = 1296.0
+[node name="Graphics" type="Node" parent="."]
+
+[node name="StartLabel" type="Label" parent="Graphics"]
+z_index = -25
+offset_left = 539.0
+offset_top = 75.0
+offset_right = 634.0
+offset_bottom = 120.0
+text = "START"
+label_settings = SubResource("LabelSettings_ffght")
+
+[node name="EndLabel" type="Label" parent="Graphics"]
+z_index = -25
+offset_left = 2736.0
+offset_top = 232.0
+offset_right = 2831.0
+offset_bottom = 277.0
+text = "END"
+label_settings = SubResource("LabelSettings_ffght")
+
+[node name="Tutorial" type="Label" parent="Graphics"]
+z_index = -25
+offset_left = 130.0
+offset_top = 123.0
+offset_right = 351.0
+offset_bottom = 168.0
+text = "Pass the maze"
+label_settings = SubResource("LabelSettings_30njc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Graphics"]
+layer = -10
+
+[node name="Background" type="TextureRect" parent="Graphics/CanvasLayer"]
+z_index = -1000
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_bj1m1")
 stretch_mode = 1
+
+[node name="Maze" parent="." instance=ExtResource("3_sa8cg")]
+z_index = -50
+position = Vector2(831, 582)
+
+[node name="Player" parent="." instance=ExtResource("2_opugl")]
+position = Vector2(562, 209)
+rotation = -1.73486
+
+[connection signal="body_exited" from="Maze" to="." method="_on_maze_body_exited"]
